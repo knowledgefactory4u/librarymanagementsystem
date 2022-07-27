@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +19,11 @@ import com.knf.dev.librarymanagementsystem.service.AuthorService;
 @Controller
 public class AuthorController {
 
-	@Autowired
-	AuthorService authorService;
+	final AuthorService authorService;
+
+	public AuthorController(AuthorService authorService) {
+		this.authorService = authorService;
+	}
 
 	@RequestMapping("/authors")
 	public String findAllAuthors(Model model, @RequestParam("page") Optional<Integer> page,

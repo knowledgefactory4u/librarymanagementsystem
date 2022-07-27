@@ -3,7 +3,6 @@ package com.knf.dev.librarymanagementsystem.service.impl;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -20,8 +19,11 @@ import com.knf.dev.librarymanagementsystem.service.AuthorService;
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
-	@Autowired
-	AuthorRepository authorRepository;
+	final AuthorRepository authorRepository;
+
+	public AuthorServiceImpl(AuthorRepository authorRepository) {
+		this.authorRepository = authorRepository;
+	}
 
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	@Override

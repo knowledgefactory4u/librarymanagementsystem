@@ -1,6 +1,5 @@
 package com.knf.dev.librarymanagementsystem.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +13,12 @@ import com.knf.dev.librarymanagementsystem.service.CategoryService;
 @Controller
 public class CategoryController {
 
-	@Autowired
-	CategoryService categoryService;
+	final CategoryService categoryService;
+
+	public CategoryController(CategoryService categoryService) {
+		this.categoryService = categoryService;
+
+	}
 
 	@RequestMapping("/categories")
 	public String findAllCategories(Model model) {

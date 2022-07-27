@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -24,14 +23,18 @@ import com.knf.dev.librarymanagementsystem.service.PublisherService;
 @Controller
 public class BookController {
 
-	@Autowired
-	BookService bookService;
-	@Autowired
-	AuthorService authorService;
-	@Autowired
-	CategoryService categoryService;
-	@Autowired
-	PublisherService publisherService;
+	final BookService bookService;
+	final AuthorService authorService;
+	final CategoryService categoryService;
+	final PublisherService publisherService;
+
+	public BookController(PublisherService publisherService, CategoryService categoryService, BookService bookService,
+			AuthorService authorService) {
+		this.authorService = authorService;
+		this.bookService = bookService;
+		this.categoryService = categoryService;
+		this.publisherService = publisherService;
+	}
 
 	@RequestMapping({ "/books", "/" })
 	public String findAllBooks(Model model, @RequestParam("page") Optional<Integer> page,

@@ -1,6 +1,5 @@
 package com.knf.dev.librarymanagementsystem.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +13,12 @@ import com.knf.dev.librarymanagementsystem.service.PublisherService;
 @Controller
 public class PublisherController {
 
-	@Autowired
-	PublisherService publisherService;
+	final PublisherService publisherService;
+
+	public PublisherController(PublisherService publisherService) {
+		this.publisherService = publisherService;
+
+	}
 
 	@RequestMapping("/publishers")
 	public String findAllPublishers(Model model) {
