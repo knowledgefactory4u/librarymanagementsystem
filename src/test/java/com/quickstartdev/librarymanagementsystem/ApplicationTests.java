@@ -2,8 +2,8 @@ package com.quickstartdev.librarymanagementsystem;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest(classes= Application.class)
+import com.knf.dev.librarymanagementsystem.Application;
+@SpringBootTest(classes=Application.class)
 class ApplicationTests {
 
 	@Test
