@@ -1,0 +1,68 @@
+[
+  {
+    "isbn": "AP1287",
+    "name": "Spring in Action",
+    "serialName": "CXEF12389",
+    "description": "Book description",
+    "authors": [
+      {
+        "name": "Matt",
+        "description": "dummy description"
+      }
+    ],
+    "categories": [
+      {
+        "name": "Dummy category"
+      }
+    ],
+    "publishers": [
+      {
+        "name": "Dummy publisher"
+      }
+    ]
+  },
+  {
+    "isbn": "BP567#R",
+    "name": "Spring Microservices",
+    "serialName": "KCXEF12389",
+    "description": "Description1",
+    "authors": [
+      {
+        "name": "Maxwell",
+        "description": "Test description1"
+      }
+    ],
+    "categories": [
+      {
+        "name": "New category"
+      }
+    ],
+    "publishers": [
+      {
+        "name": "publisher2"
+      }
+    ]
+  },
+  {
+    "isbn": "GH67F#",
+    "name": "Spring Boot",
+    "serialName": "UV#JH",
+    "description": "description2",
+    "authors": [
+      {
+        "name": "Josh Lang",
+        "description": "Test description2"
+      }
+    ],
+    "categories": [
+      {
+        "name": "Spring category"
+      }
+    ],
+    "publishers": [
+      {
+        "name": "publisher3"
+      }
+    ]
+  }
+]

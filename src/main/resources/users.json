@@ -1,0 +1,13 @@
+[
+  {
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "admin@admin.in",
+    "password": "$2a$10$V5KCR78n3oJvmD7XTdaLYugWvQhxqDpQ6GIjlCBfW9VWG8XEOrmlu",
+    "roles": [
+      {
+        "name": "ROLE_ADMIN"
+      }
+    ]
+  }
+]
