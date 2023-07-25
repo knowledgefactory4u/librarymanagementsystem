@@ -14,7 +14,7 @@ import com.knf.dev.librarymanagementsystem.service.CategoryService;
 public class CategoryController {
 
 	final CategoryService categoryService;
-	final static String ATTRIBUTE_NAME = "category";
+	static final String ATTRIBUTE_NAME = "category";
 
 	public CategoryController(CategoryService categoryService) {
 		this.categoryService = categoryService;
