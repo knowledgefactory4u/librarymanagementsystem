@@ -30,7 +30,7 @@ import static org.mockito.Mockito.*;
 */
 
 @SpringBootTest(classes= Application.class)
-public class AuthorControllerTest {
+class AuthorControllerTest {
 
     @Autowired
     static
