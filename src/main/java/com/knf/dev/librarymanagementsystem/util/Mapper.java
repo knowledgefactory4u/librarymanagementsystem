@@ -34,7 +34,7 @@ public class Mapper {
 
 	public static List<CategoryRecord> categoryModelToVo(List<Category> categories) {
 
-		return categories.stream().map(vo -> new CategoryRecord(vo.getId(), vo.getName())).collect(Collectors.toList());
+		return categories.stream().map(vo -> new CategoryRecord(vo.getId(), vo.getName())).toList();
 
 	}
 
