@@ -30,7 +30,7 @@ import static org.mockito.Mockito.*;
 */
 
 @SpringBootTest(classes= Application.class)
-public class AuthorControllerTest { 
+public class AuthorControllerTest {
 
     @Autowired
     static
@@ -49,7 +49,7 @@ public class AuthorControllerTest {
     }
 
 @Test
-public void testFindAllAuthors() {
+ void testFindAllAuthors() {
 
     int expectedPage = 1;
     int expectedSize = 10;
@@ -64,7 +64,7 @@ public void testFindAllAuthors() {
 } 
 
 @Test
-public void testFindAuthorById() {
+ void testFindAuthorById() {
     Author author = new Author();
     when(authorService.findAuthorById(10L)).thenReturn(author);
 
@@ -74,7 +74,7 @@ public void testFindAuthorById() {
 } 
 
 @Test
-public void testShowCreateForm() {
+ void testShowCreateForm() {
 
     Author author = new Author();
     String result = controller.showCreateForm(author);
@@ -82,7 +82,7 @@ public void testShowCreateForm() {
 } 
 
 @Test
-public void testCreateAuthor() {
+ void testCreateAuthor() {
     Author author = new Author();
 
     when(bindingResult.hasErrors()).thenReturn(true);
@@ -92,7 +92,7 @@ public void testCreateAuthor() {
 }
 
 @Test
-public void testCreateAuthor2() {
+ void testCreateAuthor2() {
     Author author = new Author();
 
     when(authorService.findAllAuthors()).thenReturn(null);
@@ -104,7 +104,7 @@ public void testCreateAuthor2() {
 }
 
 @Test
-public void testShowUpdateForm() {
+ void testShowUpdateForm() {
 
     Author author = new Author();
     when(authorService.findAuthorById(10L)).thenReturn(author);
@@ -115,7 +115,7 @@ public void testShowUpdateForm() {
 
 
 @Test
-public void testUpdateAuthor() {
+ void testUpdateAuthor() {
     Author author = new Author();
 
     when(bindingResult.hasErrors()).thenReturn(true);
@@ -126,7 +126,7 @@ public void testUpdateAuthor() {
 }
 
 @Test
-public void testUpdateAuthor2() {
+ void testUpdateAuthor2() {
     Author author = new Author();
 
     when(authorService.findAllAuthors()).thenReturn(null);
@@ -138,7 +138,7 @@ public void testUpdateAuthor2() {
 }
 
 @Test
-public void testDeleteAuthor() {
+ void testDeleteAuthor() {
     when(authorService.findAllAuthors()).thenReturn(null);
 
     String result = controller.deleteAuthor(10L,model);
