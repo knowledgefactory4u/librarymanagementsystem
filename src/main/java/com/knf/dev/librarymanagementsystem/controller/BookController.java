@@ -1,7 +1,6 @@
 package com.knf.dev.librarymanagementsystem.controller;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.springframework.data.domain.PageRequest;

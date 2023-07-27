@@ -1,7 +1,6 @@
 package com.knf.dev.librarymanagementsystem.controller;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.springframework.data.domain.PageRequest;
@@ -87,7 +86,7 @@ public class AuthorController {
 		}
 
 		authorService.updateAuthor(author);
-		model.addAttribute("author", authorService.findAllAuthors());
+		model.addAttribute(AUTHOR, authorService.findAllAuthors());
 		return AUTHOR_REDIRECT;
 	}
 
