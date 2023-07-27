@@ -20,12 +20,12 @@ import com.knf.dev.librarymanagementsystem.service.AuthorService;
 public class AuthorController {
 
 	final AuthorService authorService;
-	final String aAUTHORREDIRECT = "redirect:/authors";
-	final String aUPDATEAUTHOR = "update-author";
-	final String aLISTAUTHOR = "list-authors";
-	final String aADDAUTHOR = "add-author";
-	final String aAUTHOR = "author";
-	final String aAUTHORS = "authors";
+	final static String aAUTHORREDIRECT = "redirect:/authors";
+	final static String aUPDATEAUTHOR = "update-author";
+	final static String aLISTAUTHOR = "list-authors";
+	final static String aADDAUTHOR = "add-author";
+	final static String aAUTHOR = "author";
+	final static String aAUTHORS = "authors";
 
 	public AuthorController(AuthorService authorService) {
 		this.authorService = authorService;
