@@ -25,7 +25,7 @@ public class Publisher {
 	private String name;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "publishers")
-	private Set<Book> books = new HashSet<Book>();
+	private Set<Book> books = new HashSet<>();
 
 	public Publisher(String name) {
 		this.name = name;

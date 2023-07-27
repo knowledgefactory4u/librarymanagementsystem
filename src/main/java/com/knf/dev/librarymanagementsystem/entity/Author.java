@@ -29,7 +29,7 @@ public class Author {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.REMOVE }, mappedBy = "authors")
-	private Set<Book> books = new HashSet<Book>();
+	private Set<Book> books = new HashSet<>();
 
 	public Author(String name, String description) {
 		this.name = name;

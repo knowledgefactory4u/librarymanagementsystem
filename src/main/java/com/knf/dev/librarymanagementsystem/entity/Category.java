@@ -25,7 +25,7 @@ public class Category {
 	private String name;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "categories")
-	private Set<Book> books = new HashSet<Book>();
+	private Set<Book> books = new HashSet<>();
 
 	public Category(String name) {
 		this.name = name;
