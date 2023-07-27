@@ -20,6 +20,7 @@ import com.knf.dev.librarymanagementsystem.service.AuthorService;
 public class AuthorController {
 
 	final AuthorService authorService;
+	final String AUTHOR_REDIRECT = "redirect:/authors";
 
 	public AuthorController(AuthorService authorService) {
 		this.authorService = authorService;
@@ -37,7 +38,7 @@ public class AuthorController {
 
 		int totalPages = bookPage.getTotalPages();
 		if (totalPages > 0) {
-			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
 		return "list-authors";
@@ -63,7 +64,7 @@ public class AuthorController {
 
 		authorService.createAuthor(author);
 		model.addAttribute("author", authorService.findAllAuthors());
-		return "redirect:/authors";
+		return AUTHOR_REDIRECT;
 	}
 
 	@GetMapping("/updateAuthor/{id}")
@@ -82,7 +83,7 @@ public class AuthorController {
 
 		authorService.updateAuthor(author);
 		model.addAttribute("author", authorService.findAllAuthors());
-		return "redirect:/authors";
+		return AUTHOR_REDIRECT;
 	}
 
 	@RequestMapping("/remove-author/{id}")
@@ -90,7 +91,7 @@ public class AuthorController {
 		authorService.deleteAuthor(id);
 
 		model.addAttribute("author", authorService.findAllAuthors());
-		return "redirect:/authors";
+		return AUTHOR_REDIRECT;
 	}
 
 }
