@@ -21,6 +21,11 @@ public class AuthorController {
 
 	final AuthorService authorService;
 	final String AUTHOR_REDIRECT = "redirect:/authors";
+	final String UPDATE_AUTHOR = "update-author";
+	final String LIST_AUTHOR = "list-authors";
+	final String ADD_AUTHOR = "add-author";
+	final String AUTHOR = "author";
+	final String AUTHORS = "authors";
 
 	public AuthorController(AuthorService authorService) {
 		this.authorService = authorService;
@@ -34,32 +39,32 @@ public class AuthorController {
 		var pageSize = size.orElse(5);
 		var bookPage = authorService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
 
-		model.addAttribute("authors", bookPage);
+		model.addAttribute(AUTHORS, bookPage);
 
 		int totalPages = bookPage.getTotalPages();
 		if (totalPages > 0) {
 			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
-		return "list-authors";
+		return LIST_AUTHOR;
 	}
 
 	@RequestMapping("/author/{id}")
 	public String findAuthorById(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("author", authorService.findAuthorById(id));
+		model.addAttribute(AUTHOR, authorService.findAuthorById(id));
 		return "list-author";
 	}
 
 	@GetMapping("/addAuthor")
 	public String showCreateForm(Author author) {
-		return "add-author";
+		return ADD_AUTHOR;
 	}
 
 	@RequestMapping("/add-author")
 	public String createAuthor(Author author, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "add-author";
+			return ADD_AUTHOR;
 		}
 
 		authorService.createAuthor(author);
@@ -70,15 +75,15 @@ public class AuthorController {
 	@GetMapping("/updateAuthor/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("author", authorService.findAuthorById(id));
-		return "update-author";
+		model.addAttribute(AUTHOR, authorService.findAuthorById(id));
+		return UPDATE_AUTHOR;
 	}
 
 	@RequestMapping("/update-author/{id}")
 	public String updateAuthor(@PathVariable("id") Long id, Author author, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			author.setId(id);
-			return "update-author";
+			return UPDATE_AUTHOR;
 		}
 
 		authorService.updateAuthor(author);
