@@ -68,7 +68,7 @@ public class AuthorController {
 		}
 
 		authorService.createAuthor(author);
-		model.addAttribute("author", authorService.findAllAuthors());
+		model.addAttribute(AUTHOR, authorService.findAllAuthors());
 		return AUTHOR_REDIRECT;
 	}
 
@@ -95,7 +95,7 @@ public class AuthorController {
 	public String deleteAuthor(@PathVariable("id") Long id, Model model) {
 		authorService.deleteAuthor(id);
 
-		model.addAttribute("author", authorService.findAllAuthors());
+		model.addAttribute(AUTHOR, authorService.findAllAuthors());
 		return AUTHOR_REDIRECT;
 	}
 
