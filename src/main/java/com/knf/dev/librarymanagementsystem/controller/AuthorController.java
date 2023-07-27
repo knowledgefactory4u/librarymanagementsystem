@@ -20,12 +20,12 @@ import com.knf.dev.librarymanagementsystem.service.AuthorService;
 public class AuthorController {
 
 	final AuthorService authorService;
-	final String AUTHOR_REDIRECT = "redirect:/authors";
-	final String UPDATE_AUTHOR = "update-author";
-	final String LIST_AUTHOR = "list-authors";
-	final String ADD_AUTHOR = "add-author";
-	final String AUTHOR = "author";
-	final String AUTHORS = "authors";
+	final String aAUTHORREDIRECT = "redirect:/authors";
+	final String aUPDATEAUTHOR = "update-author";
+	final String aLISTAUTHOR = "list-authors";
+	final String aADDAUTHOR = "add-author";
+	final String aAUTHOR = "author";
+	final String aAUTHORS = "authors";
 
 	public AuthorController(AuthorService authorService) {
 		this.authorService = authorService;
@@ -39,56 +39,56 @@ public class AuthorController {
 		var pageSize = size.orElse(5);
 		var bookPage = authorService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
 
-		model.addAttribute(AUTHORS, bookPage);
+		model.addAttribute(aAUTHORS, bookPage);
 
 		int totalPages = bookPage.getTotalPages();
 		if (totalPages > 0) {
 			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
-		return LIST_AUTHOR;
+		return aLISTAUTHOR;
 	}
 
 	@RequestMapping("/author/{id}")
 	public String findAuthorById(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute(AUTHOR, authorService.findAuthorById(id));
+		model.addAttribute(aAUTHOR, authorService.findAuthorById(id));
 		return "list-author";
 	}
 
 	@GetMapping("/addAuthor")
 	public String showCreateForm(Author author) {
-		return ADD_AUTHOR;
+		return aADDAUTHOR;
 	}
 
 	@RequestMapping("/add-author")
 	public String createAuthor(Author author, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return ADD_AUTHOR;
+			return aADDAUTHOR;
 		}
 
 		authorService.createAuthor(author);
 		model.addAttribute("author", authorService.findAllAuthors());
-		return AUTHOR_REDIRECT;
+		return aAUTHORREDIRECT;
 	}
 
 	@GetMapping("/updateAuthor/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute(AUTHOR, authorService.findAuthorById(id));
-		return UPDATE_AUTHOR;
+		model.addAttribute(aAUTHOR, authorService.findAuthorById(id));
+		return aUPDATEAUTHOR;
 	}
 
 	@RequestMapping("/update-author/{id}")
 	public String updateAuthor(@PathVariable("id") Long id, Author author, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			author.setId(id);
-			return UPDATE_AUTHOR;
+			return aUPDATEAUTHOR;
 		}
 
 		authorService.updateAuthor(author);
 		model.addAttribute("author", authorService.findAllAuthors());
-		return AUTHOR_REDIRECT;
+		return aAUTHORREDIRECT;
 	}
 
 	@RequestMapping("/remove-author/{id}")
@@ -96,7 +96,7 @@ public class AuthorController {
 		authorService.deleteAuthor(id);
 
 		model.addAttribute("author", authorService.findAllAuthors());
-		return AUTHOR_REDIRECT;
+		return aAUTHORREDIRECT;
 	}
 
 }
