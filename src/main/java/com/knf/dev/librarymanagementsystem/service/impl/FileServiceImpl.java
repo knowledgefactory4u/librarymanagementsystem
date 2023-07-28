@@ -36,6 +36,8 @@ public class FileServiceImpl implements FileService {
 
 	final CategoryService categoryService;
 
+	static final String FILE_NOT_PRESENT = "FILE_IS_NOT_PRESENT";
+
 	public FileServiceImpl(BookService bookService, AuthorService authorService, PublisherService publisherService,
 			CategoryService categoryService) {
 		this.authorService = authorService;
@@ -49,26 +51,30 @@ public class FileServiceImpl implements FileService {
 			throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
 		var item = Item.getItemByValue(fileName);
 		response.setContentType("text/csv");
-		response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-				"attachment; filename=\"" + item.get().getFileName() + "\"");
-
-		switch (item.get()) {
-		case BOOK:
-			StatefulBeanToCsv<BookRecord> writer1 = getWriter(response.getWriter());
-			writer1.write(Mapper.bookModelToVo(bookService.findAllBooks()));
-			break;
-		case AUTHOR:
-			StatefulBeanToCsv<AuthorRecord> writer2 = getWriter(response.getWriter());
-			writer2.write(Mapper.authorModelToVo(authorService.findAllAuthors()));
-			break;
-		case CATEGORY:
-			StatefulBeanToCsv<CategoryRecord> writer3 = getWriter(response.getWriter());
-			writer3.write(Mapper.categoryModelToVo(categoryService.findAllCategories()));
-			break;
-		case PUBLISHER:
-			StatefulBeanToCsv<PublisherRecord> writer4 = getWriter(response.getWriter());
-			writer4.write(Mapper.publisherModelToVo(publisherService.findAllPublishers()));
-			break;
+		if (item.isPresent()) {
+			response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
+					"attachment; filename=\"" + item.get().getFileName() + "\"");
+			switch (item.get()) {
+			case BOOK:
+				StatefulBeanToCsv<BookRecord> writer1 = getWriter(response.getWriter());
+				writer1.write(Mapper.bookModelToVo(bookService.findAllBooks()));
+				break;
+			case AUTHOR:
+				StatefulBeanToCsv<AuthorRecord> writer2 = getWriter(response.getWriter());
+				writer2.write(Mapper.authorModelToVo(authorService.findAllAuthors()));
+				break;
+			case CATEGORY:
+				StatefulBeanToCsv<CategoryRecord> writer3 = getWriter(response.getWriter());
+				writer3.write(Mapper.categoryModelToVo(categoryService.findAllCategories()));
+				break;
+			case PUBLISHER:
+				StatefulBeanToCsv<PublisherRecord> writer4 = getWriter(response.getWriter());
+				writer4.write(Mapper.publisherModelToVo(publisherService.findAllPublishers()));
+				break;
+			}
+		} else {
+			response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
+					"attachment; filename=\"" + FILE_NOT_PRESENT + "\"");
 		}
 
 	}
