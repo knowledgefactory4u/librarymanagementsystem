@@ -34,7 +34,7 @@ public class BookController {
 		this.publisherService = publisherService;
 	}
 
-	@RequestMapping(value = { "/books", "/" },method = RequestMethod.GET)
+	@GetMapping(path = { "/books", "/" })
 	public String findAllBooks(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 
@@ -53,7 +53,7 @@ public class BookController {
 		return "list-books";
 	}
 
-	@RequestMapping(value = "/searchBook",method = RequestMethod.GET)
+	@GetMapping(path = "/searchBook")
 	public String searchBook(@Param("keyword") String keyword, Model model) {
 
 		model.addAttribute("books", bookService.searchBooks(keyword));
@@ -61,7 +61,7 @@ public class BookController {
 		return "list-books";
 	}
 
-	@RequestMapping(value = "/book/{id}",method = RequestMethod.GET)
+	@GetMapping(path = "/book/{id}")
 	public String findBookById(@PathVariable("id") Long id, Model model) {
 
 		model.addAttribute("book", bookService.findBookById(id));
@@ -77,7 +77,7 @@ public class BookController {
 		return "add-book";
 	}
 
-	@RequestMapping(value = "/add-book",method = RequestMethod.POST)
+	@PostMapping(path = "/add-book")
 	public String createBook(Book book, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "add-book";
@@ -95,7 +95,7 @@ public class BookController {
 		return "update-book";
 	}
 
-	@RequestMapping(value = "/update-book/{id}",method = RequestMethod.POST)
+	@PostMapping(value = "/update-book/{id}")
 	public String updateBook(@PathVariable("id") Long id, Book book, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			book.setId(id);
@@ -107,7 +107,7 @@ public class BookController {
 		return REDIRECT_TO_BOOKS;
 	}
 
-	@RequestMapping(value = "/remove-book/{id}",method = RequestMethod.GET)
+	@GetMapping(value = "/remove-book/{id}")
 	public String deleteBook(@PathVariable("id") Long id, Model model) {
 		bookService.deleteBook(id);
 
