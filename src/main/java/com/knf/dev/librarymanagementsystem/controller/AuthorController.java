@@ -27,7 +27,7 @@ public class AuthorController {
 		this.authorService = authorService;
 	}
 
-	@RequestMapping(value = "/authors",method = RequestMethod.GET)
+	@GetMapping(path = "/authors")
 	public String findAllAuthors(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 
@@ -45,7 +45,7 @@ public class AuthorController {
 		return LIST_AUTHOR;
 	}
 
-	@RequestMapping("/author/{id}")
+	@GetMapping("/author/{id}")
 	public String findAuthorById(@PathVariable("id") Long id, Model model) {
 
 		model.addAttribute(AUTHOR, authorService.findAuthorById(id));
@@ -59,7 +59,7 @@ public class AuthorController {
 		return ADD_AUTHOR;
 	}
 
-	@RequestMapping("/add-author")
+	@PostMapping("/add-author")
 	public String createAuthor(AuthorDTO author, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return ADD_AUTHOR;
@@ -76,7 +76,7 @@ public class AuthorController {
 		return UPDATE_AUTHOR;
 	}
 
-	@RequestMapping("/update-author/{id}")
+	@PostMapping("/update-author/{id}")
 	public String updateAuthor(@PathVariable("id") Long id, AuthorDTO author, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			author.setId(id);
@@ -88,7 +88,7 @@ public class AuthorController {
 		return AUTHOR_REDIRECT;
 	}
 
-	@RequestMapping("/remove-author/{id}")
+	@GetMapping("/remove-author/{id}")
 	public String deleteAuthor(@PathVariable("id") Long id, Model model) {
 		authorService.deleteAuthor(id);
 
