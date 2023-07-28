@@ -1,5 +1,7 @@
 package com.knf.dev.librarymanagementsystem.entity;
 
+import com.knf.dev.librarymanagementsystem.dto.AuthorDTO;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,7 +38,11 @@ public class Author {
 		this.description = description;
 	}
 
-	public Long getId() {
+    public Author(AuthorDTO author) {
+		name = author.getName();
+    }
+
+    public Long getId() {
 		return id;
 	}
 

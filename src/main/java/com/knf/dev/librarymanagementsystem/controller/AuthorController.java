@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.knf.dev.librarymanagementsystem.entity.Author;
 import com.knf.dev.librarymanagementsystem.service.AuthorService;
 
 @Controller
@@ -62,7 +61,7 @@ public class AuthorController {
 	}
 
 	@RequestMapping("/add-author")
-	public String createAuthor(Author author, BindingResult result, Model model) {
+	public String createAuthor(AuthorDTO author, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return ADD_AUTHOR;
 		}
@@ -80,7 +79,7 @@ public class AuthorController {
 	}
 
 	@RequestMapping("/update-author/{id}")
-	public String updateAuthor(@PathVariable("id") Long id, Author author, BindingResult result, Model model) {
+	public String updateAuthor(@PathVariable("id") Long id, AuthorDTO author, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			author.setId(id);
 			return UPDATE_AUTHOR;
