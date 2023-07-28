@@ -76,14 +76,14 @@ class AuthorControllerTest {
 
 @Test
  void testShowCreateForm() {
-    AuthorDTO author = new AuthorDTO("testname");
+    AuthorDTO author = new AuthorDTO("test","test");
     String result = controller.showCreateForm(author);
-    assertEquals("add-author-testname",result);
+    assertEquals("add-author",result);
 } 
 
 @Test
  void testCreateAuthor() {
-    AuthorDTO author = new AuthorDTO("test-name");
+    AuthorDTO author = new AuthorDTO("test","test");
 
     when(bindingResult.hasErrors()).thenReturn(true);
 
@@ -93,7 +93,7 @@ class AuthorControllerTest {
 
 @Test
  void testCreateAuthor2() {
-    AuthorDTO author = new AuthorDTO("test-name");
+    AuthorDTO author = new AuthorDTO("test","test");
 
     when(authorService.findAllAuthors()).thenReturn(null);
     when(bindingResult.hasErrors()).thenReturn(false);
@@ -116,7 +116,7 @@ class AuthorControllerTest {
 
 @Test
  void testUpdateAuthor() {
-    AuthorDTO author = new AuthorDTO("test-name");
+    AuthorDTO author = new AuthorDTO("test","test");
 
     when(bindingResult.hasErrors()).thenReturn(true);
 
@@ -127,7 +127,7 @@ class AuthorControllerTest {
 
 @Test
  void testUpdateAuthorEmpty() {
-    AuthorDTO author = new AuthorDTO("test-name");
+    AuthorDTO author = new AuthorDTO("test","test");
 
     when(authorService.findAllAuthors()).thenReturn(null);
     when(bindingResult.hasErrors()).thenReturn(false);
