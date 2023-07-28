@@ -1,10 +1,12 @@
 package com.knf.dev.librarymanagementsystem.controller;
 
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.knf.dev.librarymanagementsystem.entity.Publisher;
@@ -20,14 +22,14 @@ public class PublisherController {
 
 	}
 
-	@RequestMapping("/publishers")
+	@GetMapping("/publishers")
 	public String findAllPublishers(Model model) {
 
 		model.addAttribute("publishers", publisherService.findAllPublishers());
 		return "list-publishers";
 	}
 
-	@RequestMapping("/publisher/{id}")
+	@GetMapping("/publisher/{id}")
 	public String findPublisherById(@PathVariable("id") Long id, Model model) {
 
 		model.addAttribute("publisher", publisherService.findPublisherById(id));
@@ -39,7 +41,7 @@ public class PublisherController {
 		return "add-publisher";
 	}
 
-	@RequestMapping("/add-publisher")
+	@PostMapping("/add-publisher")
 	public String createPublisher(Publisher publisher, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "add-publisher";
@@ -57,7 +59,7 @@ public class PublisherController {
 		return "update-publisher";
 	}
 
-	@RequestMapping("/update-publisher/{id}")
+	@PostMapping("/update-publisher/{id}")
 	public String updatePublisher(@PathVariable("id") Long id, Publisher publisher, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			publisher.setId(id);
@@ -69,7 +71,7 @@ public class PublisherController {
 		return "redirect:/publishers";
 	}
 
-	@RequestMapping("/remove-publisher/{id}")
+	@GetMapping("/remove-publisher/{id}")
 	public String deletePublisher(@PathVariable("id") Long id, Model model) {
 		publisherService.deletePublisher(id);
 
