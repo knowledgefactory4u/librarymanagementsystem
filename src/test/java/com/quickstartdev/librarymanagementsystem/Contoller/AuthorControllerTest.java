@@ -2,6 +2,7 @@ package com.quickstartdev.librarymanagementsystem.Contoller;
 
 import com.knf.dev.librarymanagementsystem.Application;
 import com.knf.dev.librarymanagementsystem.controller.AuthorController;
+import com.knf.dev.librarymanagementsystem.dto.AuthorDTO;
 import com.knf.dev.librarymanagementsystem.entity.Author;
 import com.knf.dev.librarymanagementsystem.service.AuthorService;
 import org.junit.jupiter.api.BeforeAll;
@@ -76,9 +77,9 @@ class AuthorControllerTest {
 @Test
  void testShowCreateForm() {
 
-    Author author = new Author();
+    AuthorDTO author = new AuthorDTO("testname");
     String result = controller.showCreateForm(author);
-    assertEquals("add-author",result);
+    assertEquals("add-author-testname",result);
 } 
 
 @Test

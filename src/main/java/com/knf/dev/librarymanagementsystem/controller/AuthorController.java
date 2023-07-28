@@ -3,6 +3,7 @@ package com.knf.dev.librarymanagementsystem.controller;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
+import com.knf.dev.librarymanagementsystem.dto.AuthorDTO;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,8 +57,8 @@ public class AuthorController {
 	}
 
 	@GetMapping("/addAuthor")
-	public String showCreateForm(Author author) {
-		return ADD_AUTHOR;
+	public String showCreateForm(AuthorDTO author) {
+		return ADD_AUTHOR + "-" + author.getName();
 	}
 
 	@RequestMapping("/add-author")
