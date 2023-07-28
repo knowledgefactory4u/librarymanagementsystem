@@ -76,7 +76,6 @@ class AuthorControllerTest {
 
 @Test
  void testShowCreateForm() {
-
     AuthorDTO author = new AuthorDTO("testname");
     String result = controller.showCreateForm(author);
     assertEquals("add-author-testname",result);
