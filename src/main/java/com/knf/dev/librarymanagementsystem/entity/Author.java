@@ -40,6 +40,7 @@ public class Author {
 
     public Author(AuthorDTO author) {
 		name = author.getName();
+		this.description = author.getDescription();
     }
 
     public Long getId() {

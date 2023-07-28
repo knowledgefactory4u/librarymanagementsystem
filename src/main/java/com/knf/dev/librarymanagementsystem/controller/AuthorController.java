@@ -53,8 +53,10 @@ public class AuthorController {
 	}
 
 	@GetMapping("/addAuthor")
-	public String showCreateForm(AuthorDTO author) {
-		return ADD_AUTHOR + "-" + author.getName();
+	public String showCreateForm(@ModelAttribute("author") AuthorDTO author) {
+		author.setName("Enter A Name");
+		author.setDescription("Enter A Description");
+		return ADD_AUTHOR;
 	}
 
 	@RequestMapping("/add-author")
@@ -62,7 +64,6 @@ public class AuthorController {
 		if (result.hasErrors()) {
 			return ADD_AUTHOR;
 		}
-
 		authorService.createAuthor(author);
 		model.addAttribute(AUTHOR, authorService.findAllAuthors());
 		return AUTHOR_REDIRECT;
