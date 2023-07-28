@@ -80,9 +80,6 @@ public class BookServiceImpl implements BookService {
 			list = findAllBooks().subList(startItem, toIndex);
 		}
 
-		var bookPage = new PageImpl<Book>(list, PageRequest.of(currentPage, pageSize), findAllBooks().size());
-
-		return bookPage;
+		return new PageImpl<Book>(list, PageRequest.of(currentPage, pageSize), findAllBooks().size());
 	}
-
 }
