@@ -58,7 +58,7 @@ public class AuthorController {
 
 	@GetMapping("/addAuthor")
 	public String showCreateForm(AuthorDTO author) {
-		return ADD_AUTHOR + author.getName();
+		return ADD_AUTHOR + "-" + author.getName();
 	}
 
 	@RequestMapping("/add-author")
