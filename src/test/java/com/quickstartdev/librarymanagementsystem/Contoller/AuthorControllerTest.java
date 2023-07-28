@@ -83,7 +83,7 @@ class AuthorControllerTest {
 
 @Test
  void testCreateAuthor() {
-    Author author = new Author();
+    AuthorDTO author = new AuthorDTO("test-name");
 
     when(bindingResult.hasErrors()).thenReturn(true);
 
@@ -93,7 +93,7 @@ class AuthorControllerTest {
 
 @Test
  void testCreateAuthor2() {
-    Author author = new Author();
+    AuthorDTO author = new AuthorDTO("test-name");
 
     when(authorService.findAllAuthors()).thenReturn(null);
     when(bindingResult.hasErrors()).thenReturn(false);
@@ -116,7 +116,7 @@ class AuthorControllerTest {
 
 @Test
  void testUpdateAuthor() {
-    Author author = new Author();
+    AuthorDTO author = new AuthorDTO("test-name");
 
     when(bindingResult.hasErrors()).thenReturn(true);
 
@@ -126,8 +126,8 @@ class AuthorControllerTest {
 }
 
 @Test
- void testUpdateAuthor2() {
-    Author author = new Author();
+ void testUpdateAuthorEmpty() {
+    AuthorDTO author = new AuthorDTO("test-name");
 
     when(authorService.findAllAuthors()).thenReturn(null);
     when(bindingResult.hasErrors()).thenReturn(false);
