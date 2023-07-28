@@ -8,10 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.knf.dev.librarymanagementsystem.service.AuthorService;
 
@@ -30,7 +27,7 @@ public class AuthorController {
 		this.authorService = authorService;
 	}
 
-	@RequestMapping("/authors")
+	@RequestMapping(value = "/authors",method = RequestMethod.GET)
 	public String findAllAuthors(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 
