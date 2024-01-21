@@ -1,29 +1,23 @@
 package com.knf.dev.librarymanagementsystem.service.impl;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Service;
-
 import com.knf.dev.librarymanagementsystem.constant.Item;
-import com.knf.dev.librarymanagementsystem.service.AuthorService;
-import com.knf.dev.librarymanagementsystem.service.BookService;
-import com.knf.dev.librarymanagementsystem.service.CategoryService;
-import com.knf.dev.librarymanagementsystem.service.FileService;
-import com.knf.dev.librarymanagementsystem.service.PublisherService;
+import com.knf.dev.librarymanagementsystem.service.*;
 import com.knf.dev.librarymanagementsystem.util.Mapper;
 import com.knf.dev.librarymanagementsystem.vo.AuthorRecord;
 import com.knf.dev.librarymanagementsystem.vo.BookRecord;
 import com.knf.dev.librarymanagementsystem.vo.CategoryRecord;
 import com.knf.dev.librarymanagementsystem.vo.PublisherRecord;
-import com.opencsv.CSVWriter;
+import com.opencsv.ICSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -74,7 +68,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	private static <T> StatefulBeanToCsv<T> getWriter(PrintWriter printWriter) {
-		return new StatefulBeanToCsvBuilder<T>(printWriter).withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
-				.withSeparator(CSVWriter.DEFAULT_SEPARATOR).withOrderedResults(false).build();
+		return new StatefulBeanToCsvBuilder<T>(printWriter).withQuotechar(ICSVWriter.NO_QUOTE_CHARACTER)
+				.withSeparator(ICSVWriter.DEFAULT_SEPARATOR).withOrderedResults(false).build();
 	}
 }

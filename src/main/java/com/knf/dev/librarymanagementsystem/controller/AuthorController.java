@@ -1,9 +1,7 @@
 package com.knf.dev.librarymanagementsystem.controller;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
+import com.knf.dev.librarymanagementsystem.entity.Author;
+import com.knf.dev.librarymanagementsystem.service.AuthorService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.knf.dev.librarymanagementsystem.entity.Author;
-import com.knf.dev.librarymanagementsystem.service.AuthorService;
+import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Controller
 public class AuthorController {
@@ -37,7 +35,7 @@ public class AuthorController {
 
 		int totalPages = bookPage.getTotalPages();
 		if (totalPages > 0) {
-			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
 		return "list-authors";

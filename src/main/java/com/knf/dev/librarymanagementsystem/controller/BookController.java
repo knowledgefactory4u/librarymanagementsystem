@@ -1,9 +1,10 @@
 package com.knf.dev.librarymanagementsystem.controller;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
+import com.knf.dev.librarymanagementsystem.entity.Book;
+import com.knf.dev.librarymanagementsystem.service.AuthorService;
+import com.knf.dev.librarymanagementsystem.service.BookService;
+import com.knf.dev.librarymanagementsystem.service.CategoryService;
+import com.knf.dev.librarymanagementsystem.service.PublisherService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -14,11 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.knf.dev.librarymanagementsystem.entity.Book;
-import com.knf.dev.librarymanagementsystem.service.AuthorService;
-import com.knf.dev.librarymanagementsystem.service.BookService;
-import com.knf.dev.librarymanagementsystem.service.CategoryService;
-import com.knf.dev.librarymanagementsystem.service.PublisherService;
+import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Controller
 public class BookController {
@@ -49,7 +47,7 @@ public class BookController {
 
 		var totalPages = bookPage.getTotalPages();
 		if (totalPages > 0) {
-			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
 		return "list-books";
