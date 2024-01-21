@@ -20,7 +20,7 @@ public class Mapper {
 			var bookVo = new BookRecord(vo.getId(), vo.getIsbn(), vo.getName(), vo.getSerialName(),
 					vo.getDescription());
 			return bookVo;
-		}).collect(Collectors.toList());
+		}).toList();
 	}
 
 	public static List<AuthorRecord> authorModelToVo(List<Author> authors) {
@@ -28,7 +28,7 @@ public class Mapper {
 		return authors.stream().map(vo -> {
 			var authorVo = new AuthorRecord(vo.getId(), vo.getName(), vo.getDescription());
 			return authorVo;
-		}).collect(Collectors.toList());
+		}).toList();
 
 	}
 
@@ -37,7 +37,7 @@ public class Mapper {
 		return categories.stream().map(vo -> {
 			var categoryVo = new CategoryRecord(vo.getId(), vo.getName());
 			return categoryVo;
-		}).collect(Collectors.toList());
+		}).toList();
 
 	}
 
@@ -46,7 +46,7 @@ public class Mapper {
 		return publishers.stream().map(vo -> {
 			var publisherVo = new PublisherRecord(vo.getId(), vo.getName());
 			return publisherVo;
-		}).collect(Collectors.toList());
+		}).toList();
 
 	}
 
