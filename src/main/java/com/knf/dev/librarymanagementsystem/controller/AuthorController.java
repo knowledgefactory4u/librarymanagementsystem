@@ -22,7 +22,7 @@ public class AuthorController {
 	public AuthorController(AuthorService authorService) {
 		this.authorService = authorService;
 	}
-
+	private static final String AN_AUTHOR = "author";
 	@RequestMapping("/authors")
 	public String findAllAuthors(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
@@ -44,7 +44,7 @@ public class AuthorController {
 	@RequestMapping("/author/{id}")
 	public String findAuthorById(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("author", authorService.findAuthorById(id));
+		model.addAttribute(AN_AUTHOR, authorService.findAuthorById(id));
 		return "list-author";
 	}
 
@@ -60,14 +60,14 @@ public class AuthorController {
 		}
 
 		authorService.createAuthor(author);
-		model.addAttribute("author", authorService.findAllAuthors());
+		model.addAttribute(AN_AUTHOR, authorService.findAllAuthors());
 		return "redirect:/authors";
 	}
 
 	@GetMapping("/updateAuthor/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("author", authorService.findAuthorById(id));
+		model.addAttribute(AN_AUTHOR, authorService.findAuthorById(id));
 		return "update-author";
 	}
 
@@ -79,7 +79,7 @@ public class AuthorController {
 		}
 
 		authorService.updateAuthor(author);
-		model.addAttribute("author", authorService.findAllAuthors());
+		model.addAttribute(AN_AUTHOR, authorService.findAllAuthors());
 		return "redirect:/authors";
 	}
 
@@ -87,7 +87,7 @@ public class AuthorController {
 	public String deleteAuthor(@PathVariable("id") Long id, Model model) {
 		authorService.deleteAuthor(id);
 
-		model.addAttribute("author", authorService.findAllAuthors());
+		model.addAttribute(AN_AUTHOR, authorService.findAllAuthors());
 		return "redirect:/authors";
 	}
 

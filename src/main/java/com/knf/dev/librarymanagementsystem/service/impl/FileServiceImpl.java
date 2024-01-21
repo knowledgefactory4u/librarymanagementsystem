@@ -42,29 +42,30 @@ public class FileServiceImpl implements FileService {
 	public void exportCSV(String fileName, HttpServletResponse response)
 			throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
 		var item = Item.getItemByValue(fileName);
-		response.setContentType("text/csv");
-		response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-				"attachment; filename=\"" + item.get().getFileName() + "\"");
+		if (item.isPresent()){
+			response.setContentType("text/csv");
+			response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
+					"attachment; filename=\"" + item.get().getFileName() + "\"");
 
-		switch (item.get()) {
-		case BOOK:
-			StatefulBeanToCsv<BookRecord> writer1 = getWriter(response.getWriter());
-			writer1.write(Mapper.bookModelToVo(bookService.findAllBooks()));
-			break;
-		case AUTHOR:
-			StatefulBeanToCsv<AuthorRecord> writer2 = getWriter(response.getWriter());
-			writer2.write(Mapper.authorModelToVo(authorService.findAllAuthors()));
-			break;
-		case CATEGORY:
-			StatefulBeanToCsv<CategoryRecord> writer3 = getWriter(response.getWriter());
-			writer3.write(Mapper.categoryModelToVo(categoryService.findAllCategories()));
-			break;
-		case PUBLISHER:
-			StatefulBeanToCsv<PublisherRecord> writer4 = getWriter(response.getWriter());
-			writer4.write(Mapper.publisherModelToVo(publisherService.findAllPublishers()));
-			break;
+			switch (item.get()) {
+				case BOOK:
+					StatefulBeanToCsv<BookRecord> writer1 = getWriter(response.getWriter());
+					writer1.write(Mapper.bookModelToVo(bookService.findAllBooks()));
+					break;
+				case AUTHOR:
+					StatefulBeanToCsv<AuthorRecord> writer2 = getWriter(response.getWriter());
+					writer2.write(Mapper.authorModelToVo(authorService.findAllAuthors()));
+					break;
+				case CATEGORY:
+					StatefulBeanToCsv<CategoryRecord> writer3 = getWriter(response.getWriter());
+					writer3.write(Mapper.categoryModelToVo(categoryService.findAllCategories()));
+					break;
+				case PUBLISHER:
+					StatefulBeanToCsv<PublisherRecord> writer4 = getWriter(response.getWriter());
+					writer4.write(Mapper.publisherModelToVo(publisherService.findAllPublishers()));
+					break;
+			}
 		}
-
 	}
 
 	private static <T> StatefulBeanToCsv<T> getWriter(PrintWriter printWriter) {

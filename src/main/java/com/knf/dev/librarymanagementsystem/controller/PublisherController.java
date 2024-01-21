@@ -14,6 +14,9 @@ import com.knf.dev.librarymanagementsystem.service.PublisherService;
 public class PublisherController {
 
 	final PublisherService publisherService;
+	private static String REDIR_PUBLISHERS = "redirect:/publishers";
+	private static String A_PUBLISHER = "publisher";
+
 
 	public PublisherController(PublisherService publisherService) {
 		this.publisherService = publisherService;
@@ -30,7 +33,7 @@ public class PublisherController {
 	@RequestMapping("/publisher/{id}")
 	public String findPublisherById(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("publisher", publisherService.findPublisherById(id));
+		model.addAttribute(A_PUBLISHER, publisherService.findPublisherById(id));
 		return "list-publisher";
 	}
 
@@ -46,14 +49,14 @@ public class PublisherController {
 		}
 
 		publisherService.createPublisher(publisher);
-		model.addAttribute("publisher", publisherService.findAllPublishers());
-		return "redirect:/publishers";
+		model.addAttribute(A_PUBLISHER, publisherService.findAllPublishers());
+		return REDIR_PUBLISHERS;
 	}
 
 	@GetMapping("/updatePublisher/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("publisher", publisherService.findPublisherById(id));
+		model.addAttribute(A_PUBLISHER, publisherService.findPublisherById(id));
 		return "update-publisher";
 	}
 
@@ -65,16 +68,16 @@ public class PublisherController {
 		}
 
 		publisherService.updatePublisher(publisher);
-		model.addAttribute("publisher", publisherService.findAllPublishers());
-		return "redirect:/publishers";
+		model.addAttribute(A_PUBLISHER, publisherService.findAllPublishers());
+		return REDIR_PUBLISHERS;
 	}
 
 	@RequestMapping("/remove-publisher/{id}")
 	public String deletePublisher(@PathVariable("id") Long id, Model model) {
 		publisherService.deletePublisher(id);
 
-		model.addAttribute("publisher", publisherService.findAllPublishers());
-		return "redirect:/publishers";
+		model.addAttribute(A_PUBLISHER, publisherService.findAllPublishers());
+		return REDIR_PUBLISHERS;
 	}
 
 }

@@ -14,6 +14,9 @@ import com.knf.dev.librarymanagementsystem.service.CategoryService;
 public class CategoryController {
 
 	final CategoryService categoryService;
+	private static String A_CATEGORY = "category";
+	private static String REDIR_CATEGORIES = "redirect:/categories";
+
 
 	public CategoryController(CategoryService categoryService) {
 		this.categoryService = categoryService;
@@ -30,7 +33,7 @@ public class CategoryController {
 	@RequestMapping("/category/{id}")
 	public String findCategoryById(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("category", categoryService.findCategoryById(id));
+		model.addAttribute(A_CATEGORY, categoryService.findCategoryById(id));
 		return "list-category";
 	}
 
@@ -46,14 +49,14 @@ public class CategoryController {
 		}
 
 		categoryService.createCategory(category);
-		model.addAttribute("category", categoryService.findAllCategories());
-		return "redirect:/categories";
+		model.addAttribute(A_CATEGORY, categoryService.findAllCategories());
+		return REDIR_CATEGORIES;
 	}
 
 	@GetMapping("/updateCategory/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("category", categoryService.findCategoryById(id));
+		model.addAttribute(A_CATEGORY, categoryService.findCategoryById(id));
 		return "update-category";
 	}
 
@@ -65,16 +68,16 @@ public class CategoryController {
 		}
 
 		categoryService.updateCategory(category);
-		model.addAttribute("category", categoryService.findAllCategories());
-		return "redirect:/categories";
+		model.addAttribute(A_CATEGORY, categoryService.findAllCategories());
+		return REDIR_CATEGORIES;
 	}
 
 	@RequestMapping("/remove-category/{id}")
 	public String deleteCategory(@PathVariable("id") Long id, Model model) {
 		categoryService.deleteCategory(id);
 
-		model.addAttribute("category", categoryService.findAllCategories());
-		return "redirect:/categories";
+		model.addAttribute(A_CATEGORY, categoryService.findAllCategories());
+		return REDIR_CATEGORIES;
 	}
 
 }
