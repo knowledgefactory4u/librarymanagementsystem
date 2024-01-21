@@ -37,7 +37,7 @@ public class AuthorController {
 
 		int totalPages = bookPage.getTotalPages();
 		if (totalPages > 0) {
-			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
 		return "list-authors";
