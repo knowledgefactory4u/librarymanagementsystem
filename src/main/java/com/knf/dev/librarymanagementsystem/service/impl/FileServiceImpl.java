@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.opencsv.ICSVWriter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
@@ -74,7 +75,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	private static <T> StatefulBeanToCsv<T> getWriter(PrintWriter printWriter) {
-		return new StatefulBeanToCsvBuilder<T>(printWriter).withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
-				.withSeparator(CSVWriter.DEFAULT_SEPARATOR).withOrderedResults(false).build();
+		return new StatefulBeanToCsvBuilder<T>(printWriter).withQuotechar(ICSVWriter.NO_QUOTE_CHARACTER)
+				.withSeparator(ICSVWriter.DEFAULT_SEPARATOR).withOrderedResults(false).build();
 	}
 }
