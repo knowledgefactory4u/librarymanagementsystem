@@ -1,17 +1,15 @@
 package com.knf.dev.librarymanagementsystem.service.impl;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
-
+import com.knf.dev.librarymanagementsystem.entity.Role;
+import com.knf.dev.librarymanagementsystem.repository.UserRepository;
+import com.knf.dev.librarymanagementsystem.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.knf.dev.librarymanagementsystem.entity.Role;
-import com.knf.dev.librarymanagementsystem.repository.UserRepository;
-import com.knf.dev.librarymanagementsystem.service.UserService;
+import java.util.Collection;
 
 @Service
 public class UserServiceImpl implements UserService {
