@@ -14,6 +14,9 @@ import com.knf.dev.librarymanagementsystem.vo.PublisherRecord;
 
 public class Mapper {
 
+	private Mapper() {
+		throw new IllegalStateException("Utility class");
+	}
 	public static List<BookRecord> bookModelToVo(List<Book> books) {
 
 		return books.stream().map(vo -> {
