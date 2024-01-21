@@ -17,8 +17,8 @@ import com.knf.dev.librarymanagementsystem.service.UserService;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private UserService userService;
+
+	private final UserService userService;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -33,6 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return auth;
 	}
 
+	public SecurityConfiguration(UserService userService){
+		this.userService = userService;
+	}
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(authenticationProvider());
