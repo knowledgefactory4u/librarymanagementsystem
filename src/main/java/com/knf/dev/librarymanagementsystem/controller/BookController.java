@@ -27,7 +27,7 @@ public class BookController {
 	final AuthorService authorService;
 	final CategoryService categoryService;
 	final PublisherService publisherService;
-
+	private static String REDIR_BOOKS = "redirect:/books";
 	public BookController(PublisherService publisherService, CategoryService categoryService, BookService bookService,
 			AuthorService authorService) {
 		this.authorService = authorService;
@@ -87,7 +87,7 @@ public class BookController {
 
 		bookService.createBook(book);
 		model.addAttribute("book", bookService.findAllBooks());
-		return "redirect:/books";
+		return REDIR_BOOKS;
 	}
 
 	@GetMapping("/update/{id}")
@@ -106,7 +106,7 @@ public class BookController {
 
 		bookService.updateBook(book);
 		model.addAttribute("book", bookService.findAllBooks());
-		return "redirect:/books";
+		return REDIR_BOOKS;
 	}
 
 	@RequestMapping("/remove-book/{id}")
@@ -114,7 +114,7 @@ public class BookController {
 		bookService.deleteBook(id);
 
 		model.addAttribute("book", bookService.findAllBooks());
-		return "redirect:/books";
+		return REDIR_BOOKS;
 	}
 
 }
