@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.knf.dev.librarymanagementsystem.entity.Publisher;
 import com.knf.dev.librarymanagementsystem.service.PublisherService;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class PublisherController {
@@ -23,16 +24,14 @@ public class PublisherController {
 
 	}
 
-	@RequestMapping("/publishers")
+	@RequestMapping(path="/publishers",method= RequestMethod.GET)
 	public String findAllPublishers(Model model) {
-
 		model.addAttribute("publishers", publisherService.findAllPublishers());
 		return "list-publishers";
 	}
 
-	@RequestMapping("/publisher/{id}")
+	@RequestMapping(path="/publisher/{id}",method= RequestMethod.GET)
 	public String findPublisherById(@PathVariable("id") Long id, Model model) {
-
 		model.addAttribute(A_PUBLISHER, publisherService.findPublisherById(id));
 		return "list-publisher";
 	}
@@ -42,12 +41,11 @@ public class PublisherController {
 		return "add-publisher";
 	}
 
-	@RequestMapping("/add-publisher")
+	@RequestMapping(path="/add-publisher",method= RequestMethod.POST)
 	public String createPublisher(Publisher publisher, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "add-publisher";
 		}
-
 		publisherService.createPublisher(publisher);
 		model.addAttribute(A_PUBLISHER, publisherService.findAllPublishers());
 		return REDIR_PUBLISHERS;
@@ -55,27 +53,24 @@ public class PublisherController {
 
 	@GetMapping("/updatePublisher/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-
 		model.addAttribute(A_PUBLISHER, publisherService.findPublisherById(id));
 		return "update-publisher";
 	}
 
-	@RequestMapping("/update-publisher/{id}")
+	@RequestMapping(path="/update-publisher/{id}",method= RequestMethod.POST)
 	public String updatePublisher(@PathVariable("id") Long id, Publisher publisher, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			publisher.setId(id);
 			return "update-publishers";
 		}
-
 		publisherService.updatePublisher(publisher);
 		model.addAttribute(A_PUBLISHER, publisherService.findAllPublishers());
 		return REDIR_PUBLISHERS;
 	}
 
-	@RequestMapping("/remove-publisher/{id}")
+	@RequestMapping(path="/remove-publisher/{id}",method= RequestMethod.GET)
 	public String deletePublisher(@PathVariable("id") Long id, Model model) {
 		publisherService.deletePublisher(id);
-
 		model.addAttribute(A_PUBLISHER, publisherService.findAllPublishers());
 		return REDIR_PUBLISHERS;
 	}

@@ -10,10 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -26,6 +23,8 @@ public class BookController {
 	final CategoryService categoryService;
 	final PublisherService publisherService;
 	private static String REDIR_BOOKS = "redirect:/books";
+	private static String A_BOOK = "book";
+	private static String BOOKS = "books";
 	public BookController(PublisherService publisherService, CategoryService categoryService, BookService bookService,
 			AuthorService authorService) {
 		this.authorService = authorService;
@@ -34,7 +33,7 @@ public class BookController {
 		this.publisherService = publisherService;
 	}
 
-	@RequestMapping({ "/books", "/" })
+	@RequestMapping(path={ "/books", "/" },method= RequestMethod.GET)
 	public String findAllBooks(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 
@@ -43,7 +42,7 @@ public class BookController {
 
 		var bookPage = bookService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
 
-		model.addAttribute("books", bookPage);
+		model.addAttribute(BOOKS, bookPage);
 
 		var totalPages = bookPage.getTotalPages();
 		if (totalPages > 0) {
@@ -53,18 +52,18 @@ public class BookController {
 		return "list-books";
 	}
 
-	@RequestMapping("/searchBook")
+	@RequestMapping(path="/searchBook",method= RequestMethod.GET)
 	public String searchBook(@Param("keyword") String keyword, Model model) {
 
-		model.addAttribute("books", bookService.searchBooks(keyword));
+		model.addAttribute(BOOKS, bookService.searchBooks(keyword));
 		model.addAttribute("keyword", keyword);
 		return "list-books";
 	}
 
-	@RequestMapping("/book/{id}")
+	@RequestMapping(path="/book/{id}",method= RequestMethod.GET)
 	public String findBookById(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("book", bookService.findBookById(id));
+		model.addAttribute(A_BOOK, bookService.findBookById(id));
 		return "list-book";
 	}
 
@@ -77,25 +76,25 @@ public class BookController {
 		return "add-book";
 	}
 
-	@RequestMapping("/add-book")
+	@RequestMapping(path="/add-book",method= RequestMethod.POST)
 	public String createBook(Book book, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "add-book";
 		}
 
 		bookService.createBook(book);
-		model.addAttribute("book", bookService.findAllBooks());
+		model.addAttribute(A_BOOK, bookService.findAllBooks());
 		return REDIR_BOOKS;
 	}
 
 	@GetMapping("/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("book", bookService.findBookById(id));
+		model.addAttribute(A_BOOK, bookService.findBookById(id));
 		return "update-book";
 	}
 
-	@RequestMapping("/update-book/{id}")
+	@RequestMapping(path="/update-book/{id}",method= RequestMethod.POST)
 	public String updateBook(@PathVariable("id") Long id, Book book, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			book.setId(id);
@@ -103,15 +102,15 @@ public class BookController {
 		}
 
 		bookService.updateBook(book);
-		model.addAttribute("book", bookService.findAllBooks());
+		model.addAttribute(A_BOOK, bookService.findAllBooks());
 		return REDIR_BOOKS;
 	}
 
-	@RequestMapping("/remove-book/{id}")
+	@RequestMapping(path="/remove-book/{id}",method= RequestMethod.GET)
 	public String deleteBook(@PathVariable("id") Long id, Model model) {
 		bookService.deleteBook(id);
 
-		model.addAttribute("book", bookService.findAllBooks());
+		model.addAttribute(A_BOOK, bookService.findAllBooks());
 		return REDIR_BOOKS;
 	}
 
