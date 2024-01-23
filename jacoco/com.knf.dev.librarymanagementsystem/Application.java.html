@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Application.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">librarymanagementsystem</a> &gt; <a href="index.source.html" class="el_package">com.knf.dev.librarymanagementsystem</a> &gt; <span class="el_source">Application.java</span></div><h1>Application.java</h1><pre class="source lang-java linenums">package com.knf.dev.librarymanagementsystem;
+
+import com.knf.dev.librarymanagementsystem.entity.*;
+import com.knf.dev.librarymanagementsystem.repository.UserRepository;
+import com.knf.dev.librarymanagementsystem.service.BookService;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Arrays;
+
+@SpringBootApplication
+public class Application {
+
+
+	private final BCryptPasswordEncoder passwordEncoder;
+
+
+	private final BookService bookService;
+
+
+	private final UserRepository userRepository;
+
+
+<span class="fc" id="L27">	public Application(BCryptPasswordEncoder passwordEncoder, BookService bookService, UserRepository userRepository){</span>
+<span class="fc" id="L28">		this.passwordEncoder = passwordEncoder;</span>
+<span class="fc" id="L29">		this.bookService = bookService;</span>
+<span class="fc" id="L30">		this.userRepository = userRepository;</span>
+<span class="fc" id="L31">	}</span>
+
+
+	public static void main(String[] args) {
+<span class="nc" id="L35">		SpringApplication.run(Application.class, args);</span>
+<span class="nc" id="L36">	}</span>
+
+	@Bean
+	public CommandLineRunner initialCreate() {
+<span class="fc" id="L40">		return (args) -&gt; {</span>
+
+<span class="fc" id="L42">			var book = new Book(&quot;AP1287&quot;, &quot;Spring in Action &quot;, &quot;CXEF12389&quot;, &quot;Book description&quot;);</span>
+<span class="fc" id="L43">			book.addAuthors(new Author(&quot;Matt&quot;, &quot;dummy description&quot;));</span>
+<span class="fc" id="L44">			book.addCategories(new Category(&quot;Dummy categary&quot;));</span>
+<span class="fc" id="L45">			book.addPublishers(new Publisher(&quot;Dummy publisher&quot;));</span>
+<span class="fc" id="L46">			bookService.createBook(book);</span>
+
+<span class="fc" id="L48">			var book1 = new Book(&quot;BP567#R&quot;, &quot;Spring Microservices&quot;, &quot;KCXEF12389&quot;, &quot;Description1&quot;);</span>
+<span class="fc" id="L49">			book1.addAuthors(new Author(&quot;Maxwell&quot;, &quot;Test description1&quot;));</span>
+<span class="fc" id="L50">			book1.addCategories(new Category(&quot;New category&quot;));</span>
+<span class="fc" id="L51">			book1.addPublishers(new Publisher(&quot;publisher2&quot;));</span>
+<span class="fc" id="L52">			bookService.createBook(book1);</span>
+
+<span class="fc" id="L54">			var book2 = new Book(&quot;GH67F#&quot;, &quot;Spring Boot&quot;, &quot;UV#JH&quot;, &quot;description2&quot;);</span>
+<span class="fc" id="L55">			book2.addAuthors(new Author(&quot;Josh Lang&quot;, &quot;Test description2&quot;));</span>
+<span class="fc" id="L56">			book2.addCategories(new Category(&quot;Spring category&quot;));</span>
+<span class="fc" id="L57">			book2.addPublishers(new Publisher(&quot;publisher3&quot;));</span>
+<span class="fc" id="L58">			bookService.createBook(book2);</span>
+
+<span class="fc" id="L60">			var user = new User(&quot;admin&quot;, &quot;admin&quot;, &quot;admin@admin.in&quot;, passwordEncoder.encode(&quot;Temp123&quot;),</span>
+<span class="fc" id="L61">					Arrays.asList(new Role(&quot;ROLE_ADMIN&quot;)));</span>
+<span class="fc" id="L62">			userRepository.save(user);</span>
+
+<span class="fc" id="L64">		};</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

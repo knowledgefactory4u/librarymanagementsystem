@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Item.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">librarymanagementsystem</a> &gt; <a href="index.source.html" class="el_package">com.knf.dev.librarymanagementsystem.constant</a> &gt; <span class="el_source">Item.java</span></div><h1>Item.java</h1><pre class="source lang-java linenums">package com.knf.dev.librarymanagementsystem.constant;
+
+import java.util.Arrays;
+import java.util.Optional;
+
+<span class="nc" id="L6">public enum Item {</span>
+
+<span class="nc" id="L8">	BOOK(&quot;all-book&quot;, &quot;Book-List.csv&quot;), CATEGORY(&quot;all-category&quot;, &quot;Category-List.csv&quot;),</span>
+<span class="nc" id="L9">	PUBLISHER(&quot;all-publisher&quot;, &quot;Publisher-List.csv&quot;), AUTHOR(&quot;all-author&quot;, &quot;Author-List.csv&quot;);</span>
+
+	private final String name;
+	private final String fileName;
+
+<span class="nc" id="L14">	Item(String name, String fileName) {</span>
+<span class="nc" id="L15">		this.name = name;</span>
+<span class="nc" id="L16">		this.fileName = fileName;</span>
+<span class="nc" id="L17">	}</span>
+
+	public String getName() {
+<span class="nc" id="L20">		return name;</span>
+	}
+
+	public String getFileName() {
+<span class="nc" id="L24">		return fileName;</span>
+	}
+
+	public static Optional&lt;Item&gt; getItemByValue(String value) {
+<span class="nc" id="L28">		return Arrays.stream(Item.values())</span>
+<span class="nc bnc" id="L29" title="All 4 branches missed.">				.filter(accStatus -&gt; accStatus.name.equals(value) || accStatus.fileName.equals(value)).findFirst();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
