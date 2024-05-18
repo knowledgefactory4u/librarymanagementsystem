@@ -67,22 +67,29 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public Page<Book> findPaginated(Pageable pageable) {
+		long startTime = System.currentTimeMillis(); // 开始计时
 
-		var pageSize = pageable.getPageSize();
-		var currentPage = pageable.getPageNumber();
-		var startItem = currentPage * pageSize;
+		List<Book> allBooks = findAllBooks();
+		int pageSize = pageable.getPageSize();
+		int currentPage = pageable.getPageNumber();
+		int startItem = currentPage * pageSize;
 		List<Book> list;
 
-		if (findAllBooks().size() < startItem) {
+		if (allBooks.size() < startItem) {
 			list = Collections.emptyList();
 		} else {
-			var toIndex = Math.min(startItem + pageSize, findAllBooks().size());
-			list = findAllBooks().subList(startItem, toIndex);
+			int toIndex = Math.min(startItem + pageSize, allBooks.size());
+			list = allBooks.subList(startItem, toIndex);
 		}
 
-		var bookPage = new PageImpl<Book>(list, PageRequest.of(currentPage, pageSize), findAllBooks().size());
+		var bookPage = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), allBooks.size());
+
+		long endTime = System.currentTimeMillis(); // 结束计时
+		System.out.println("Optimized method execution time: " + (endTime - startTime) + "ms");
 
 		return bookPage;
 	}
+
+
 
 }
