@@ -19,7 +19,7 @@ import com.knf.dev.librarymanagementsystem.service.AuthorService;
 @Controller
 public class AuthorController {
 
-	final AuthorService authorService;
+	private final AuthorService authorService;
 
 	public AuthorController(AuthorService authorService) {
 		this.authorService = authorService;

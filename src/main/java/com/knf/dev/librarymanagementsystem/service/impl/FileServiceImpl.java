@@ -28,13 +28,13 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 @Service
 public class FileServiceImpl implements FileService {
 
-	final BookService bookService;
+	private final BookService bookService;
 
-	final AuthorService authorService;
+	private final AuthorService authorService;
 
-	final PublisherService publisherService;
+	private final PublisherService publisherService;
 
-	final CategoryService categoryService;
+	private final CategoryService categoryService;
 
 	public FileServiceImpl(BookService bookService, AuthorService authorService, PublisherService publisherService,
 			CategoryService categoryService) {

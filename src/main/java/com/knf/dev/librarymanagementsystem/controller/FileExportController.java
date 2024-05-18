@@ -11,7 +11,7 @@ import com.knf.dev.librarymanagementsystem.service.FileService;
 @Controller
 public class FileExportController {
 
-	final FileService fileService;
+	private final FileService fileService;
 
 	public FileExportController(FileService fileService) {
 		this.fileService = fileService;

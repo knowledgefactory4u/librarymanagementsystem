@@ -14,7 +14,7 @@ import com.knf.dev.librarymanagementsystem.service.PublisherService;
 @Service
 public class PublisherServiceImpl implements PublisherService {
 
-	final PublisherRepository publisherRepository;
+	private final PublisherRepository publisherRepository;
 
 	public PublisherServiceImpl(PublisherRepository publisherRepository) {
 		this.publisherRepository = publisherRepository;

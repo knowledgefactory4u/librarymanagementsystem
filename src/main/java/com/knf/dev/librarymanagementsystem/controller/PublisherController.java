@@ -13,7 +13,7 @@ import com.knf.dev.librarymanagementsystem.service.PublisherService;
 @Controller
 public class PublisherController {
 
-	final PublisherService publisherService;
+	private final PublisherService publisherService;
 
 	public PublisherController(PublisherService publisherService) {
 		this.publisherService = publisherService;

@@ -16,7 +16,7 @@ import com.knf.dev.librarymanagementsystem.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-	final UserRepository userRepository;
+	private final UserRepository userRepository;
 
 	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;

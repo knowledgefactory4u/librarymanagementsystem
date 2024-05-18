@@ -13,7 +13,7 @@ import com.knf.dev.librarymanagementsystem.service.CategoryService;
 @Controller
 public class CategoryController {
 
-	final CategoryService categoryService;
+	private final CategoryService categoryService;
 
 	public CategoryController(CategoryService categoryService) {
 		this.categoryService = categoryService;

@@ -14,7 +14,7 @@ import com.knf.dev.librarymanagementsystem.service.CategoryService;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-	final CategoryRepository categoryRepository;
+	private final CategoryRepository categoryRepository;
 
 	public CategoryServiceImpl(CategoryRepository categoryRepository) {
 		this.categoryRepository = categoryRepository;

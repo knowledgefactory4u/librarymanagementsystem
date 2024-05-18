@@ -19,7 +19,7 @@ import com.knf.dev.librarymanagementsystem.service.BookService;
 @Service
 public class BookServiceImpl implements BookService {
 
-	final BookRepository bookRepository;
+	private final BookRepository bookRepository;
 
 	public BookServiceImpl(BookRepository bookRepository) {
 		this.bookRepository = bookRepository;

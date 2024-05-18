@@ -23,10 +23,10 @@ import com.knf.dev.librarymanagementsystem.service.PublisherService;
 @Controller
 public class BookController {
 
-	final BookService bookService;
-	final AuthorService authorService;
-	final CategoryService categoryService;
-	final PublisherService publisherService;
+	private final BookService bookService;
+	private final AuthorService authorService;
+	private final CategoryService categoryService;
+	private final PublisherService publisherService;
 
 	public BookController(PublisherService publisherService, CategoryService categoryService, BookService bookService,
 			AuthorService authorService) {
